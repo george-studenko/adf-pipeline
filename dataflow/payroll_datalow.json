@@ -1,0 +1,67 @@
+{
+	"name": "payroll_datalow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "payroll2020",
+						"type": "DatasetReference"
+					},
+					"name": "payroll2020"
+				}
+			],
+			"sinks": [
+				{
+					"linkedService": {
+						"referenceName": "AzureSqlDatabase1",
+						"type": "LinkedServiceReference"
+					},
+					"name": "agencydb"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          FiscalYear as string,",
+				"          PayrollNumber as string,",
+				"          AgencyID as string,",
+				"          AgencyName as string,",
+				"          EmployeeID as string,",
+				"          LastName as string,",
+				"          FirstName as string,",
+				"          AgencyStartDate as string,",
+				"          WorkLocationBorough as string,",
+				"          TitleCode as string,",
+				"          TitleDescription as string,",
+				"          LeaveStatusasofJune30 as string,",
+				"          BaseSalary as string,",
+				"          PayBasis as string,",
+				"          RegularHours as string,",
+				"          RegularGrossPaid as string,",
+				"          OTHours as string,",
+				"          TotalOTPaid as string,",
+				"          TotalOtherPay as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> payroll2020",
+				"payroll2020 sink(allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'dbo',",
+				"     tableName: 'NYC_Payroll_Data_2020',",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     deletable: false,",
+				"     upsertable: false,",
+				"     truncate: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> agencydb"
+			]
+		}
+	}
+}
