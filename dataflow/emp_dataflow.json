@@ -1,5 +1,5 @@
 {
-	"name": "emp_datalow",
+	"name": "emp_dataflow",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -18,7 +18,7 @@
 						"referenceName": "AzureSqlDatabase1",
 						"type": "LinkedServiceReference"
 					},
-					"name": "agencydb"
+					"name": "emddb"
 				}
 			],
 			"transformations": [],
@@ -44,7 +44,7 @@
 				"     truncate: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> agencydb"
+				"     errorHandlingOption: 'stopOnFirstError') ~> emddb"
 			]
 		}
 	}

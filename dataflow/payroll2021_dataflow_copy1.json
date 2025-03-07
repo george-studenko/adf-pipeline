@@ -1,15 +1,15 @@
 {
-	"name": "agency_dataflow",
+	"name": "payroll2021_dataflow_copy1",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "AgencyMaster",
+						"referenceName": "TitleMaster",
 						"type": "DatasetReference"
 					},
-					"name": "agency"
+					"name": "title"
 				}
 			],
 			"sinks": [
@@ -18,24 +18,24 @@
 						"referenceName": "AzureSqlDatabase1",
 						"type": "LinkedServiceReference"
 					},
-					"name": "agencydb"
+					"name": "titledb"
 				}
 			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          AgencyID as string,",
-				"          AgencyName as string",
+				"          TitleCode as string,",
+				"          TitleDescription as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> agency",
-				"agency sink(allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false) ~> title",
+				"title sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'dbo',",
-				"     tableName: 'NYC_Payroll_AGENCY_MD',",
+				"     tableName: 'NYC_Payroll_TITLE_MD',",
 				"     insertable: true,",
 				"     updateable: false,",
 				"     deletable: false,",
@@ -43,7 +43,7 @@
 				"     truncate: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> agencydb"
+				"     errorHandlingOption: 'stopOnFirstError') ~> titledb"
 			]
 		}
 	}

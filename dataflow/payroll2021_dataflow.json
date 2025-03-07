@@ -1,15 +1,15 @@
 {
-	"name": "payroll2020_dataflow",
+	"name": "payroll2021_dataflow",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "payroll2020",
+						"referenceName": "payroll2021",
 						"type": "DatasetReference"
 					},
-					"name": "payroll2020"
+					"name": "payroll2021"
 				}
 			],
 			"sinks": [
@@ -18,7 +18,7 @@
 						"referenceName": "AzureSqlDatabase1",
 						"type": "LinkedServiceReference"
 					},
-					"name": "payroll2020db"
+					"name": "payroll2021db"
 				}
 			],
 			"transformations": [],
@@ -26,7 +26,7 @@
 				"source(output(",
 				"          FiscalYear as string,",
 				"          PayrollNumber as string,",
-				"          AgencyID as string,",
+				"          AgencyCode as string,",
 				"          AgencyName as string,",
 				"          EmployeeID as string,",
 				"          LastName as string,",
@@ -46,13 +46,13 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> payroll2020",
-				"payroll2020 sink(allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false) ~> payroll2021",
+				"payroll2021 sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     format: 'table',",
 				"     store: 'sqlserver',",
 				"     schemaName: 'dbo',",
-				"     tableName: 'NYC_Payroll_Data_2020',",
+				"     tableName: 'NYC_Payroll_Data_2021',",
 				"     insertable: true,",
 				"     updateable: false,",
 				"     deletable: false,",
@@ -60,7 +60,7 @@
 				"     truncate: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> payroll2020db"
+				"     errorHandlingOption: 'stopOnFirstError') ~> payroll2021db"
 			]
 		}
 	}
