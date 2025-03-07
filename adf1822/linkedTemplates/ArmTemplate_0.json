@@ -557,13 +557,18 @@
 						"     columnDelimiter: ',',",
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
-						"     columnNamesAsHeader: true,",
+						"     columnNamesAsHeader: false,",
 						"     umask: 0022,",
 						"     preCommands: [],",
 						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
-						"     saveOrder: 1) ~> sink2"
+						"     saveOrder: 1,",
+						"     mapColumn(",
+						"          AgencyName,",
+						"          FiscalYear,",
+						"          TotalPaid = Total",
+						"     )) ~> sink2"
 					]
 				}
 			},
